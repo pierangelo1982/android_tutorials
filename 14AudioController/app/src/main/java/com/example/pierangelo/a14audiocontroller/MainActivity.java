@@ -7,7 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.MediaController;
 import android.widget.SeekBar;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +48,39 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("controllo", Integer.toString(progress));
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+        final SeekBar scrubber = (SeekBar) findViewById(R.id.scrubber);
+        scrubber.setMax(mediaPlayer.getDuration());
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                //
+                scrubber.setProgress(mediaPlayer.getCurrentPosition());
+            }
+        }, 0, 100);
+
+        scrubber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                Log.i("scrubber posizione", Integer.toString(progress));
+
+                mediaPlayer.seekTo(progress); // in questo modo agguiorno il getCurrenPosition presente in new Timer()....
+
             }
 
             @Override
