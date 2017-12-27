@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         cousins.add("Maddalena");
         cousins.add("Raffaele");
         cousins.add("Gioele");
-        
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cousins);
 
         cousinsListView.setAdapter(arrayAdapter);
