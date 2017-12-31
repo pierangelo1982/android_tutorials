@@ -32,4 +32,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-// Showing & Hiding UI Elements
